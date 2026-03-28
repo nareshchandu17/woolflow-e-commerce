@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - WoolFlow</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-white': '#F8F6F0',
+                        'oat': '#E8E0D0',
+                        'mist-grey': '#C8C0B8',
+                        'charcoal': '#4A4A4A',
+                        'sage': '#A8B0A0',
+                        'stone': '#B8A898'
+                    },
+                    fontFamily: {
+                        'display': ['Inter', 'serif'],
+                        'body': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #F8F6F0 0%, #E8E0D0 100%);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .wool-texture {
+            background-image: radial-gradient(circle at 1px 1px, rgba(168, 176, 160, 0.15) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .filter-checkbox:checked + .filter-label {
+            background-color: #4A4A4A;
+            color: #F8F6F0;
+        }
+        
+        .size-option {
+            transition: all 0.2s ease;
+        }
+        
+        .size-option:hover {
+            background-color: #A8B0A0;
+            color: white;
+        }
+        
+        .size-option.selected {
+            background-color: #4A4A4A;
+            color: #F8F6F0;
+        }
+        
+        .size-option.unavailable {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        .stagger-delay-5 { transition-delay: 0.5s; }
+        .stagger-delay-6 { transition-delay: 0.6s; }
+    </style>
+</head>
+<body class="wool-texture">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-warm-white/90 backdrop-blur-md border-b border-mist-grey/20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-2xl font-display font-bold text-charcoal">WoolFlow</a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="text-charcoal hover:text-sage transition-colors">Home</a>
+                        <a href="#" class="text-sage font-medium">Products</a>
+                        <a href="index.html#story" class="text-charcoal hover:text-sage transition-colors">Story</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="cart-toggle" onclick="toggleCart()" class="relative p-2 text-charcoal hover:text-sage transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0V19a2 2 0 002 2h7a2 2 0 002-2v-4"></path>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-sage text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-32 pb-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-display font-bold text-charcoal mb-4">Our Collection</h1>
+                <p class="text-xl text-charcoal/70 max-w-2xl mx-auto">
+                    Discover premium wool sneakers designed for modern urban living and natural comfort.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="pb-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-4 gap-8">
+                <!-- Filters Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="bg-warm-white/80 backdrop-blur-sm rounded-2xl p-6 sticky top-32">
+                        <h3 class="text-xl font-semibold text-charcoal mb-6">Filters</h3>
+                        
+                        <!-- Category Filter -->
+                        <div class="mb-6">
+                            <h4 class="font-medium text-charcoal mb-3">Category</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="urban" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all">Urban</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="active" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all">Active</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="casual" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all">Casual</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Color Filter -->
+                        <div class="mb-6">
+                            <h4 class="font-medium text-charcoal mb-3">Color</h4>
+                            <div class="grid grid-cols-2 gap-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="oat" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all text-center">Oat</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="sage" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all text-center">Sage</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="mist" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all text-center">Mist</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="charcoal" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all text-center">Charcoal</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Size Filter -->
+                        <div class="mb-6">
+                            <h4 class="font-medium text-charcoal mb-3">Size</h4>
+                            <div class="grid grid-cols-3 gap-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="7" onchange="applyFilters()">
+                                    <span class="filter-label px-2 py-1 rounded border border-mist-grey text-sm cursor-pointer transition-all text-center">7</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="8" onchange="applyFilters()">
+                                    <span class="filter-label px-2 py-1 rounded border border-mist-grey text-sm cursor-pointer transition-all text-center">8</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="9" onchange="applyFilters()">
+                                    <span class="filter-label px-2 py-1 rounded border border-mist-grey text-sm cursor-pointer transition-all text-center">9</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="10" onchange="applyFilters()">
+                                    <span class="filter-label px-2 py-1 rounded border border-mist-grey text-sm cursor-pointer transition-all text-center">10</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="11" onchange="applyFilters()">
+                                    <span class="filter-label px-2 py-1 rounded border border-mist-grey text-sm cursor-pointer transition-all text-center">11</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="12" onchange="applyFilters()">
+                                    <span class="filter-label px-2 py-1 rounded border border-mist-grey text-sm cursor-pointer transition-all text-center">12</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Price Range -->
+                        <div class="mb-6">
+                            <h4 class="font-medium text-charcoal mb-3">Price Range</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="0-150" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all">Under $150</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="150-170" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all">$150 - $170</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="filter-checkbox hidden" value="170-200" onchange="applyFilters()">
+                                    <span class="filter-label px-3 py-2 rounded-full border border-mist-grey text-sm cursor-pointer transition-all">$170+</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button onclick="clearFilters()" class="w-full py-2 text-charcoal hover:text-sage transition-colors text-sm font-medium">
+                            Clear All Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="lg:col-span-3">
+                    <!-- Sort Options -->
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="text-charcoal/70">
+                            <span id="product-count">18</span> products found
+                        </div>
+                        <select id="sort-select" onchange="sortProducts()" class="px-4 py-2 bg-warm-white border border-mist-grey rounded-lg text-charcoal focus:outline-none focus:border-sage">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest</option>
+                            <option value="popular">Most Popular</option>
+                        </select>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div id="products-grid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                        <!-- Products will be dynamically loaded here -->
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="text-center mt-12">
+                        <button id="load-more" class="px-8 py-3 bg-charcoal text-warm-white rounded-full hover:bg-charcoal/90 transition-all font-medium">
+                            Load More Products
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-charcoal text-warm-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h4 class="text-2xl font-display font-bold mb-4">WoolFlow</h4>
+            <p class="text-warm-white/70 mb-6">Natural wool meets urban tech</p>
+            <p class="text-sm text-warm-white/50">© 2024 WoolFlow. Crafted with natural materials for modern living.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-sidebar-header">
+            <h3 class="cart-sidebar-title">Shopping Cart</h3>
+            <button class="cart-sidebar-close" onclick="toggleCart()" aria-label="Close cart">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div id="cart-sidebar-items" class="cart-sidebar-items">
+            <div class="cart-sidebar-empty">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                <p>Your cart is empty</p>
+                <a href="products.html">Start Shopping</a>
+            </div>
+        </div>
+        <div class="cart-sidebar-footer">
+            <div class="cart-subtotal-row">
+                <span class="cart-subtotal-label">Subtotal</span>
+                <span id="cart-total" class="cart-subtotal-value">$0</span>
+            </div>
+            <button onclick="window.location.href='cart.html'" class="cart-checkout-btn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+                Checkout
+            </button>
+            <button onclick="toggleCart()" class="cart-continue-btn">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 bg-black/50 opacity-0 invisible transition-all duration-300 z-50 flex items-center justify-center p-6">
+        <div class="bg-warm-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-mist-grey/20 flex items-center justify-between">
+                <h3 id="modal-title" class="text-2xl font-display font-bold text-charcoal"></h3>
+                <button onclick="closeProductModal()" class="p-2 text-charcoal hover:text-sage">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <img id="modal-image" src="" alt="" class="w-full h-80 object-cover rounded-xl mb-4">
+                        <div class="grid grid-cols-4 gap-2">
+                            <img src="resources/product-urban-oat.jpg" alt="View 1" class="w-full h-20 object-cover rounded-lg cursor-pointer opacity-60 hover:opacity-100">
+                            <img src="resources/product-urban-sage.jpg" alt="View 2" class="w-full h-20 object-cover rounded-lg cursor-pointer opacity-60 hover:opacity-100">
+                            <img src="resources/product-urban-mist.jpg" alt="View 3" class="w-full h-20 object-cover rounded-lg cursor-pointer opacity-60 hover:opacity-100">
+                            <img src="resources/product-urban-charcoal.jpg" alt="View 4" class="w-full h-20 object-cover rounded-lg cursor-pointer opacity-60 hover:opacity-100">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mb-6">
+                            <span id="modal-price" class="text-3xl font-bold text-charcoal"></span>
+                        </div>
+                        <p id="modal-description" class="text-charcoal/80 mb-6 leading-relaxed"></p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-charcoal mb-3">Select Size</h4>
+                            <div class="grid grid-cols-6 gap-2" id="size-grid">
+                                <!-- Size options will be dynamically generated -->
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-charcoal mb-3">Key Features</h4>
+                            <ul class="space-y-2 text-charcoal/80">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-sage mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Temperature regulating merino wool
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-sage mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Moisture-wicking & odor resistant
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-sage mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Sustainable & biodegradable materials
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-sage mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Lightweight all-day comfort
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <button id="modal-add-to-cart" class="w-full py-3 bg-charcoal text-warm-white rounded-full hover:bg-charcoal/90 transition-all font-medium">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

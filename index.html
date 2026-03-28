@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WoolFlow - Natural Wool Meets Urban Tech</title>
+    <meta name="description" content="Premium wool sneakers crafted with sustainable merino wool and urban innovation. Experience natural comfort meets modern technology.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Premium CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
+    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</head>
+<body>
+    <!-- Navigation - Glass Morphism -->
+    <nav class="nav-glass" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">WoolFlow</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="#story" class="nav-link">Our Story</a>
+                <a href="#features" class="nav-link">Features</a>
+            </div>
+            <button class="cart-btn" id="cart-toggle" onclick="toggleCart()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                <span class="cart-count" id="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-floating-shapes">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+            <div class="hero-shape hero-shape-3"></div>
+        </div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    New Collection 2026
+                </div>
+                <h1 class="hero-title">
+                    Natural Wool
+                    <span class="hero-title-accent">Meets Urban Tech</span>
+                </h1>
+                <p class="hero-description">
+                    Experience the perfect harmony of sustainable merino wool and cutting-edge urban design. 
+                    Our sneakers adapt to your lifestyle, providing unmatched comfort from city streets to mountain trails.
+                </p>
+                <div class="hero-buttons">
+                    <a href="products.html" class="btn btn-primary">
+                        <span>Explore Collection</span>
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <a href="#story" class="btn btn-secondary">Our Story</a>
+                </div>
+            </div>
+            
+            <div class="hero-image-container">
+                <div class="hero-image-glow"></div>
+                <div class="hero-image-wrapper">
+                    <img src="resources/hero-wool.jpg" alt="WoolFlow Premium Wool Sneakers" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Curated Selection</span>
+                <h2 class="section-title">Featured Collection</h2>
+                <p class="section-description">
+                    Discover our most loved designs, crafted with premium merino wool and sustainable innovation.
+                </p>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <article class="product-card reveal stagger-1" data-product-id="urban-oat">
+                    <div class="product-image-container product-image-zoom-container">
+                        <img src="resources/product-urban-oat.jpg" alt="Urban Wool Runner" class="product-image">
+                        <div class="product-image-overlay"></div>
+                        <div class="zoom-indicator">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge">Popular</span>
+                        <div class="product-quick-actions">
+                            <button class="quick-action-btn" title="Quick view">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                            <button class="quick-action-btn" title="Add to wishlist">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-category">Urban Collection</span>
+                        <h3 class="product-name">Urban Wool Runner</h3>
+                        <p class="product-description">Premium merino wool with temperature regulation and moisture-wicking technology for all-day comfort.</p>
+                        <div class="product-footer">
+                            <span class="product-price">
+                                <span class="product-price-currency">$</span>149
+                            </span>
+                            <button class="btn-add-cart" onclick="addToCart('urban-oat', 'Urban Wool Runner', 149, 'resources/product-urban-oat.jpg')">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="product-card reveal stagger-2" data-product-id="city-sage">
+                    <div class="product-image-container product-image-zoom-container">
+                        <img src="resources/product-urban-sage.jpg" alt="City Trekker" class="product-image">
+                        <div class="product-image-overlay"></div>
+                        <div class="zoom-indicator">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge">New</span>
+                        <div class="product-quick-actions">
+                            <button class="quick-action-btn" title="Quick view">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                            <button class="quick-action-btn" title="Add to wishlist">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-category">Active Collection</span>
+                        <h3 class="product-name">City Trekker</h3>
+                        <p class="product-description">All-terrain wool sneakers with enhanced grip and waterproof protection for urban exploration.</p>
+                        <div class="product-footer">
+                            <span class="product-price">
+                                <span class="product-price-currency">$</span>169
+                            </span>
+                            <button class="btn-add-cart" onclick="addToCart('city-sage', 'City Trekker', 169, 'resources/product-urban-sage.jpg')">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="product-card reveal stagger-3" data-product-id="metro-mist">
+                    <div class="product-image-container product-image-zoom-container">
+                        <img src="resources/product-urban-mist.jpg" alt="Metro Slip-On" class="product-image">
+                        <div class="product-image-overlay"></div>
+                        <div class="zoom-indicator">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                            </svg>
+                        </div>
+                        <div class="product-quick-actions">
+                            <button class="quick-action-btn" title="Quick view">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                            <button class="quick-action-btn" title="Add to wishlist">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-category">Casual Collection</span>
+                        <h3 class="product-name">Metro Slip-On</h3>
+                        <p class="product-description">Effortless style meets comfort in these easy-wear wool slip-ons for everyday moments.</p>
+                        <div class="product-footer">
+                            <span class="product-price">
+                                <span class="product-price-currency">$</span>129
+                            </span>
+                            <button class="btn-add-cart" onclick="addToCart('metro-mist', 'Metro Slip-On', 129, 'resources/product-urban-mist.jpg')">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="product-card reveal stagger-4" data-product-id="street-charcoal">
+                    <div class="product-image-container product-image-zoom-container">
+                        <img src="resources/product-urban-charcoal.jpg" alt="Street Walker" class="product-image">
+                        <div class="product-image-overlay"></div>
+                        <div class="zoom-indicator">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                            </svg>
+                        </div>
+                        <div class="product-quick-actions">
+                            <button class="quick-action-btn" title="Quick view">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                            <button class="quick-action-btn" title="Add to wishlist">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-category">Urban Collection</span>
+                        <h3 class="product-name">Street Walker</h3>
+                        <p class="product-description">Classic design with modern wool technology for everyday urban adventures.</p>
+                        <div class="product-footer">
+                            <span class="product-price">
+                                <span class="product-price-currency">$</span>159
+                            </span>
+                            <button class="btn-add-cart" onclick="addToCart('street-charcoal', 'Street Walker', 159, 'resources/product-urban-charcoal.jpg')">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 5 -->
+                <article class="product-card reveal stagger-5" data-product-id="commuter-oat">
+                    <div class="product-image-container product-image-zoom-container">
+                        <img src="resources/product-urban-oat.jpg" alt="Commuter Classic" class="product-image">
+                        <div class="product-image-overlay"></div>
+                        <div class="zoom-indicator">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge" style="background: var(--color-stone);">Best Seller</span>
+                        <div class="product-quick-actions">
+                            <button class="quick-action-btn" title="Quick view">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                            <button class="quick-action-btn" title="Add to wishlist">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-category">Urban Collection</span>
+                        <h3 class="product-name">Commuter Classic</h3>
+                        <p class="product-description">Perfect for daily commutes with superior comfort and timeless style.</p>
+                        <div class="product-footer">
+                            <span class="product-price">
+                                <span class="product-price-currency">$</span>139
+                            </span>
+                            <button class="btn-add-cart" onclick="addToCart('commuter-oat', 'Commuter Classic', 139, 'resources/product-urban-oat.jpg')">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 6 -->
+                <article class="product-card reveal stagger-6" data-product-id="trail-sage">
+                    <div class="product-image-container product-image-zoom-container">
+                        <img src="resources/product-urban-sage.jpg" alt="Trail Blazer" class="product-image">
+                        <div class="product-image-overlay"></div>
+                        <div class="zoom-indicator">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                            </svg>
+                        </div>
+                        <div class="product-quick-actions">
+                            <button class="quick-action-btn" title="Quick view">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                            <button class="quick-action-btn" title="Add to wishlist">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-category">Active Collection</span>
+                        <h3 class="product-name">Trail Blazer</h3>
+                        <p class="product-description">Rugged wool sneakers designed for outdoor adventures and city exploration.</p>
+                        <div class="product-footer">
+                            <span class="product-price">
+                                <span class="product-price-currency">$</span>179
+                            </span>
+                            <button class="btn-add-cart" onclick="addToCart('trail-sage', 'Trail Blazer', 179, 'resources/product-urban-sage.jpg')">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="text-center" style="margin-top: var(--space-12);">
+                <a href="products.html" class="btn btn-secondary" style="padding: var(--space-4) var(--space-10);">
+                    View All Products
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features" style="padding: var(--space-32) 0; background: var(--color-cream);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Why WoolFlow</span>
+                <h2 class="section-title">Crafted with Purpose</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="feature-card reveal stagger-1" style="background: white; padding: var(--space-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-md); transition: all var(--transition-base);">
+                    <div style="width: 64px; height: 64px; background: var(--gradient-sage); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-6);">
+                        <svg width="32" height="32" fill="none" stroke="white" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">Natural Materials</h3>
+                    <p style="color: var(--color-charcoal-light);">100% sustainable merino wool sourced from certified farms with ethical practices.</p>
+                </div>
+                
+                <div class="feature-card reveal stagger-2" style="background: white; padding: var(--space-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-md); transition: all var(--transition-base);">
+                    <div style="width: 64px; height: 64px; background: var(--gradient-sage); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-6);">
+                        <svg width="32" height="32" fill="none" stroke="white" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">Temperature Control</h3>
+                    <p style="color: var(--color-charcoal-light);">Merino wool naturally regulates temperature, keeping you warm in winter and cool in summer.</p>
+                </div>
+                
+                <div class="feature-card reveal stagger-3" style="background: white; padding: var(--space-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-md); transition: all var(--transition-base);">
+                    <div style="width: 64px; height: 64px; background: var(--gradient-sage); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-6);">
+                        <svg width="32" height="32" fill="none" stroke="white" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">Eco-Friendly</h3>
+                    <p style="color: var(--color-charcoal-light);">Biodegradable materials and carbon-neutral shipping for a sustainable future.</p>
+                </div>
+                
+                <div class="feature-card reveal stagger-4" style="background: white; padding: var(--space-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-md); transition: all var(--transition-base);">
+                    <div style="width: 64px; height: 64px; background: var(--gradient-sage); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-6);">
+                        <svg width="32" height="32" fill="none" stroke="white" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">All-Day Comfort</h3>
+                    <p style="color: var(--color-charcoal-light);">Lightweight design with cushioned soles for maximum comfort during long days.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story Section -->
+    <section class="story-section" id="story" style="padding: var(--space-32) 0; background: var(--color-warm-white);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center;">
+                <div class="reveal-left">
+                    <span class="section-label">Our Story</span>
+                    <h2 class="section-title" style="margin-bottom: var(--space-6);">Born from Nature, Designed for the City</h2>
+                    <p style="font-size: var(--text-lg); color: var(--color-charcoal-light); margin-bottom: var(--space-6); line-height: 1.8;">
+                        At WoolFlow, we believe in the perfect harmony between nature's wisdom and urban innovation. Our journey began with a simple question: What if the most advanced footwear technology was already perfected by nature?
+                    </p>
+                    <p style="font-size: var(--text-lg); color: var(--color-charcoal-light); margin-bottom: var(--space-8); line-height: 1.8;">
+                        Merino wool, with its incredible temperature regulation, moisture-wicking properties, and natural odor resistance, became our foundation. We paired this miracle fiber with cutting-edge urban design.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6);">
+                        <div style="text-align: center;">
+                            <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-sage); margin-bottom: var(--space-2);">100%</div>
+                            <div style="font-size: var(--text-sm); color: var(--color-charcoal-light);">Natural Materials</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-sage); margin-bottom: var(--space-2);">50K+</div>
+                            <div style="font-size: var(--text-sm); color: var(--color-charcoal-light);">Happy Customers</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-sage); margin-bottom: var(--space-2);">4.9</div>
+                            <div style="font-size: var(--text-sm); color: var(--color-charcoal-light);">Average Rating</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-right">
+                    <img src="resources/lifestyle-natural-1.jpg" alt="WoolFlow sustainability" style="width: 100%; height: 500px; object-fit: cover; border-radius: var(--radius-3xl); box-shadow: var(--shadow-2xl);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section style="padding: var(--space-24) 0; background: var(--gradient-sage);">
+        <div class="container" style="text-align: center;">
+            <h2 class="reveal" style="font-size: var(--text-3xl); color: white; margin-bottom: var(--space-4);">Join the WoolFlow Community</h2>
+            <p class="reveal stagger-1" style="font-size: var(--text-lg); color: rgba(255,255,255,0.9); max-width: 500px; margin: 0 auto var(--space-8);">Subscribe for exclusive offers, new product alerts, and sustainable living tips.</p>
+            <form class="reveal stagger-2" style="display: flex; gap: var(--space-4); max-width: 500px; margin: 0 auto; justify-content: center;">
+                <input type="email" placeholder="Enter your email" style="flex: 1; padding: var(--space-4) var(--space-6); border: none; border-radius: var(--radius-full); font-size: var(--text-base); outline: none;">
+                <button type="submit" class="btn" style="background: var(--color-charcoal); color: white;">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: var(--space-16) 0 var(--space-8); background: var(--color-charcoal); color: white;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-12); margin-bottom: var(--space-12);">
+                <div>
+                    <h3 style="font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-4);">WoolFlow</h3>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.7;">Natural wool meets urban tech. Sustainable footwear for the modern explorer.</p>
+                </div>
+                <div>
+                    <h4 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-4);">Shop</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: var(--space-3);">
+                        <li><a href="products.html" style="color: rgba(255,255,255,0.7); transition: color var(--transition-fast);">All Products</a></li>
+                        <li><a href="#" style="color: rgba(255,255,255,0.7); transition: color var(--transition-fast);">Urban Collection</a></li>
+                        <li><a href="#" style="color: rgba(255,255,255,0.7); transition: color var(--transition-fast);">Active Collection</a></li>
+                        <li><a href="#" style="color: rgba(255,255,255,0.7); transition: color var(--transition-fast);">Casual Collection</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-4);">Support</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: var(--space-3);">
+                        <li><a href="#" style="color: rgba(255,255,255,0.7); transition: color var(--transition-fast);">Size Guide</a></li>
+                        <li><a href="#" style="color: rgba(255,255,255,0.7); transition: color var(--transition-fast);">Shipping Info</a></li>
+                        <li><a href="#" style="color: rgba(255,255,255,0.7); transition: color var(--transition-fast);">Returns</a></li>
+                        <li><a href="#" style="color: rgba(255,255,255,0.7); transition: color var(--transition-fast);">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-4);">Connect</h4>
+                    <div style="display: flex; gap: var(--space-4);">
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast);">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast);">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--space-8); display: flex; justify-content: space-between; align-items: center;">
+                <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.5);">© 2024 WoolFlow. All rights reserved.</p>
+                <div style="display: flex; gap: var(--space-6);">
+                    <a href="#" style="font-size: var(--text-sm); color: rgba(255,255,255,0.5);">Privacy Policy</a>
+                    <a href="#" style="font-size: var(--text-sm); color: rgba(255,255,255,0.5);">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-sidebar-header">
+            <h3 class="cart-sidebar-title">Shopping Cart</h3>
+            <button class="cart-sidebar-close" onclick="toggleCart()" aria-label="Close cart">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div id="cart-sidebar-items" class="cart-sidebar-items">
+            <div class="cart-sidebar-empty">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                <p>Your cart is empty</p>
+                <a href="products.html">Start Shopping</a>
+            </div>
+        </div>
+        <div class="cart-sidebar-footer">
+            <div class="cart-subtotal-row">
+                <span class="cart-subtotal-label">Subtotal</span>
+                <span id="cart-total" class="cart-subtotal-value">$0</span>
+            </div>
+            <button onclick="window.location.href='cart.html'" class="cart-checkout-btn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+                Checkout
+            </button>
+            <button onclick="toggleCart()" class="cart-continue-btn">Continue Shopping</button>
+        </div>
+    </div>
+    
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+
+    <script src="main.js"></script>
+    <script>
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

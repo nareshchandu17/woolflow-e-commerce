@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - WoolFlow</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-white': '#F8F6F0',
+                        'oat': '#E8E0D0',
+                        'mist-grey': '#C8C0B8',
+                        'charcoal': '#4A4A4A',
+                        'sage': '#A8B0A0',
+                        'stone': '#B8A898'
+                    },
+                    fontFamily: {
+                        'display': ['Inter', 'serif'],
+                        'body': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #F8F6F0 0%, #E8E0D0 100%);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .wool-texture {
+            background-image: radial-gradient(circle at 1px 1px, rgba(168, 176, 160, 0.15) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        
+        .quantity-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #A8B0A0;
+            color: white;
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .checkout-step {
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+        
+        .checkout-step.active {
+            opacity: 1;
+        }
+        
+        .checkout-step.completed {
+            opacity: 1;
+            color: #A8B0A0;
+        }
+    </style>
+</head>
+<body class="wool-texture">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-warm-white/90 backdrop-blur-md border-b border-mist-grey/20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-2xl font-display font-bold text-charcoal">WoolFlow</a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="text-charcoal hover:text-sage transition-colors">Home</a>
+                        <a href="products.html" class="text-charcoal hover:text-sage transition-colors">Products</a>
+                        <a href="index.html#story" class="text-charcoal hover:text-sage transition-colors">Story</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="cart-toggle" class="relative p-2 text-charcoal hover:text-sage transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0V19a2 2 0 002 2h7a2 2 0 002-2v-4"></path>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-sage text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-32 pb-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-display font-bold text-charcoal mb-4">Shopping Cart</h1>
+                <p class="text-xl text-charcoal/70">Review your items and proceed to checkout</p>
+            </div>
+            
+            <!-- Checkout Steps -->
+            <div class="flex items-center justify-center space-x-8 mb-12">
+                <div class="checkout-step active flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-charcoal text-warm-white rounded-full flex items-center justify-center text-sm font-medium">1</div>
+                    <span class="font-medium">Cart Review</span>
+                </div>
+                <div class="w-12 h-0.5 bg-mist-grey"></div>
+                <div class="checkout-step flex items-center space-x-2">
+                    <div class="w-8 h-8 border-2 border-mist-grey text-mist-grey rounded-full flex items-center justify-center text-sm font-medium">2</div>
+                    <span>Shipping Info</span>
+                </div>
+                <div class="w-12 h-0.5 bg-mist-grey"></div>
+                <div class="checkout-step flex items-center space-x-2">
+                    <div class="w-8 h-8 border-2 border-mist-grey text-mist-grey rounded-full flex items-center justify-center text-sm font-medium">3</div>
+                    <span>Payment</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <section class="pb-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-3 gap-12">
+                <!-- Cart Items -->
+                <div class="lg:col-span-2">
+                    <div class="bg-warm-white/80 backdrop-blur-sm rounded-2xl p-6">
+                        <h2 class="text-2xl font-display font-bold text-charcoal mb-6">Your Items</h2>
+                        
+                        <div id="cart-items-list">
+                            <!-- Cart items will be dynamically loaded here -->
+                        </div>
+                        
+                        <div class="border-t border-mist-grey/20 pt-6 mt-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-medium text-charcoal">Subtotal</span>
+                                <span id="cart-subtotal" class="text-xl font-bold text-charcoal">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-warm-white/80 backdrop-blur-sm rounded-2xl p-6 sticky top-32">
+                        <h3 class="text-xl font-display font-bold text-charcoal mb-6">Order Summary</h3>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-charcoal/70">Subtotal</span>
+                                <span id="summary-subtotal" class="text-charcoal">$0.00</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-charcoal/70">Shipping</span>
+                                <span class="text-charcoal">Free</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-charcoal/70">Tax</span>
+                                <span id="summary-tax" class="text-charcoal">$0.00</span>
+                            </div>
+                            <div class="border-t border-mist-grey/20 pt-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-semibold text-charcoal">Total</span>
+                                    <span id="summary-total" class="text-xl font-bold text-charcoal">$0.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Discount Code -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-charcoal mb-2">Discount Code</label>
+                            <div class="flex space-x-2">
+                                <input type="text" id="discount-code" placeholder="Enter code" class="flex-1 px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                                <button onclick="applyDiscount()" class="px-4 py-2 bg-sage text-white rounded-lg hover:bg-sage/90 transition-colors">
+                                    Apply
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Checkout Button -->
+                        <button onclick="proceedToCheckout()" class="w-full py-3 bg-charcoal text-warm-white rounded-full hover:bg-charcoal/90 transition-all font-medium mb-4">
+                            Proceed to Checkout
+                        </button>
+                        
+                        <button onclick="window.location.href='products.html'" class="w-full py-3 border-2 border-charcoal text-charcoal rounded-full hover:bg-charcoal hover:text-warm-white transition-all font-medium">
+                            Continue Shopping
+                        </button>
+
+                        <!-- Payment Methods -->
+                        <div class="mt-6 pt-6 border-t border-mist-grey/20">
+                            <p class="text-sm text-charcoal/70 mb-4">We accept:</p>
+                            <div class="flex space-x-4">
+                                <div class="w-12 h-8 bg-mist-grey/30 rounded flex items-center justify-center text-xs font-medium">VISA</div>
+                                <div class="w-12 h-8 bg-mist-grey/30 rounded flex items-center justify-center text-xs font-medium">MC</div>
+                                <div class="w-12 h-8 bg-mist-grey/30 rounded flex items-center justify-center text-xs font-medium">AMEX</div>
+                                <div class="w-12 h-8 bg-mist-grey/30 rounded flex items-center justify-center text-xs font-medium">PayPal</div>
+                            </div>
+                        </div>
+
+                        <!-- Security Badge -->
+                        <div class="mt-6 pt-6 border-t border-mist-grey/20 text-center">
+                            <div class="flex items-center justify-center space-x-2 text-sm text-charcoal/70">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Secure checkout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/50 opacity-0 invisible transition-all duration-300 z-50 flex items-center justify-center p-6">
+        <div class="bg-warm-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-mist-grey/20">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-2xl font-display font-bold text-charcoal">Checkout</h3>
+                    <button onclick="closeCheckoutModal()" class="p-2 text-charcoal hover:text-sage">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <form id="checkout-form">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal mb-2">First Name</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal mb-2">Last Name</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-charcoal mb-2">Email Address</label>
+                        <input type="email" required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-charcoal mb-2">Phone Number</label>
+                        <input type="tel" required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-charcoal mb-2">Shipping Address</label>
+                        <input type="text" required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal mb-2">City</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal mb-2">State</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal mb-2">ZIP Code</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-charcoal mb-2">Payment Method</label>
+                        <select required class="w-full px-3 py-2 border border-mist-grey rounded-lg focus:outline-none focus:border-sage">
+                            <option value="">Select payment method</option>
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="amex">American Express</option>
+                            <option value="paypal">PayPal</option>
+                        </select>
+                    </div>
+                    
+                    <div class="border-t border-mist-grey/20 pt-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-lg font-semibold text-charcoal">Order Total</span>
+                            <span id="checkout-total" class="text-xl font-bold text-charcoal">$0.00</span>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-sage text-white rounded-full hover:bg-sage/90 transition-all font-medium">
+                            Complete Order
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black/50 opacity-0 invisible transition-all duration-300 z-50 flex items-center justify-center p-6">
+        <div class="bg-warm-white rounded-2xl max-w-md w-full p-8 text-center">
+            <div class="w-16 h-16 bg-sage rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-display font-bold text-charcoal mb-4">Order Confirmed!</h3>
+            <p class="text-charcoal/70 mb-6">Thank you for your purchase. You'll receive a confirmation email shortly.</p>
+            <p class="text-sm text-charcoal/60 mb-6">Order #WF-2024-001</p>
+            <button onclick="closeSuccessModal()" class="px-6 py-3 bg-charcoal text-warm-white rounded-full hover:bg-charcoal/90 transition-all font-medium">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-charcoal text-warm-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h4 class="text-2xl font-display font-bold mb-4">WoolFlow</h4>
+            <p class="text-warm-white/70 mb-6">Natural wool meets urban tech</p>
+            <p class="text-sm text-warm-white/50">© 2024 WoolFlow. Crafted with natural materials for modern living.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
